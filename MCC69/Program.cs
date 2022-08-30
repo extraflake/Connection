@@ -1,4 +1,5 @@
-﻿using MCC69.Models;
+﻿using MCC69.Context;
+using MCC69.Models;
 using MCC69.Repositories.Data;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace MCC69
     {
         static void Main(string[] args)
         {
-            SqlConnection sqlConnection = new SqlConnection();
+            SqlConnection sqlConnection = new SqlConnection(MyContext.GetConnection());
             DepartmentRepository departmentRepository = new DepartmentRepository(sqlConnection);
 
             //foreach (var item in departmentRepository.GetAll())
@@ -31,16 +32,16 @@ namespace MCC69
             //    Console.WriteLine("No Data Found");
             //}
 
-            //Department department = new Department("ADD 5");
-            //var result = departmentRepository.Insert(department);
-            //if (result > 0)
-            //{
-            //    Console.WriteLine("Data has been successfully inserted");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Failed to insert data");
-            //}
+            Department department = new Department(null);
+            var result = departmentRepository.Insert(department);
+            if (result > 0)
+            {
+                Console.WriteLine("Data has been successfully inserted");
+            }
+            else
+            {
+                Console.WriteLine("Failed to insert data");
+            }
 
             //Department department = new Department(1, "ADD 5");
             //var result = departmentRepository.Update(department);

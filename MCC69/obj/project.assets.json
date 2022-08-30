@@ -459,11 +459,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Naufal Aji Wibowo\\source\\repos\\MCC69\\MCC69\\MCC69.csproj",
+      "projectUniqueName": "C:\\Users\\Naufal Aji Wibowo\\Documents\\GitHub\\Connection\\MCC69\\MCC69.csproj",
       "projectName": "MCC69",
-      "projectPath": "C:\\Users\\Naufal Aji Wibowo\\source\\repos\\MCC69\\MCC69\\MCC69.csproj",
+      "projectPath": "C:\\Users\\Naufal Aji Wibowo\\Documents\\GitHub\\Connection\\MCC69\\MCC69.csproj",
       "packagesPath": "C:\\Users\\Naufal Aji Wibowo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Naufal Aji Wibowo\\source\\repos\\MCC69\\MCC69\\obj\\",
+      "outputPath": "C:\\Users\\Naufal Aji Wibowo\\Documents\\GitHub\\Connection\\MCC69\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Naufal Aji Wibowo\\AppData\\Roaming\\NuGet\\NuGet.Config",

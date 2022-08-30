@@ -11,11 +11,12 @@ namespace MCC69.Repositories.Data
     {
         SqlConnection sqlConnection;
         readonly string connectionString;
+        SqlTransaction sqlTransaction;
+        SqlCommand sqlCommand;
 
         public DepartmentRepository(SqlConnection sqlConnection)
         {
             this.sqlConnection = sqlConnection;
-            connectionString = MyContext.GetConnection();
         }
 
         public List<Department> GetAll()
@@ -73,30 +74,31 @@ namespace MCC69.Repositories.Data
 
         public int Insert(Department department)
         {
-            string query = $"INSERT INTO Department (Name) VALUES (@name)";
+            string query1 = $"INSERT INTO Department (Name) VALUES (@name)";
+            string query2 = $"INSERT INTO Division (Name) VALUES (@namediv)";
 
-            if(!department.Check(department))
+            try
             {
-                return 0;
-            }
-            else
-            {
-                sqlConnection = new SqlConnection(connectionString);
                 sqlConnection.Open();
+                sqlTransaction = sqlConnection.BeginTransaction();
+                sqlCommand = new SqlCommand(query2, sqlConnection, sqlTransaction);
+                sqlCommand.Parameters.Add(new SqlParameter("@namediv", "try"));
+                int result2 = sqlCommand.ExecuteNonQuery();
 
-                SqlTransaction sqlTransaction = sqlConnection.BeginTransaction();
-                SqlCommand sqlCommand = sqlConnection.CreateCommand();
-                sqlCommand.Transaction = sqlTransaction;
-                sqlCommand.CommandText = query;
+                sqlCommand = new SqlCommand(query1, sqlConnection, sqlTransaction);
                 sqlCommand.Parameters.Add(new SqlParameter("@name", department.Name));
                 int result = sqlCommand.ExecuteNonQuery();
 
                 sqlTransaction.Commit();
                 if (result > 0)
                     return result;
-                sqlTransaction.Rollback();
-                return 0;
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                sqlTransaction.Rollback();
+            }
+            return 0;
         }
 
         public int Update(Department department)
